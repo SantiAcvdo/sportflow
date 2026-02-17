@@ -1,0 +1,465 @@
+<!-- index.html - Página de Login y Registro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportFlow - Acceso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .card-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 2rem 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #0f172a;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            cursor: pointer;
+            width: auto;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #0284c7;
+            margin-top: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn.active {
+            color: #0284c7;
+            border-bottom-color: #0284c7;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message-success {
+            background: #ecfdf5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .message-error {
+            background: #fef2f2;
+            color: #7f1d1d;
+            border-left: 4px solid #dc2626;
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+        }
+
+        .demo-info {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #065f46;
+        }
+
+        .demo-info strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-info p {
+            margin: 0.25rem 0;
+        }
+    </style>
+    <link rel="stylesheet" href="css/auth.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>⚽ SportFlow</h1>
+                <p>Gestión Integral de Clubes</p>
+            </div>
+
+            <div class="card-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+                    <button class="tab-btn" data-tab="register">Registro</button>
+                </div>
+
+                <!-- Mensaje de estado -->
+                <div id="message" class="message"></div>
+
+                <!-- TAB: LOGIN -->
+                <div id="login" class="tab-content active">
+                    <div class="demo-info">
+                        <strong>👤 Credenciales de Demostración:</strong>
+                        <p>Email: <strong>admin@club.com</strong></p>
+                        <p>Contraseña: <strong>Demo123!</strong></p>
+                    </div>
+
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input 
+                                type="email" 
+                                id="loginEmail" 
+                                required 
+                                placeholder="tu@email.com"
+                                value="admin@club.com"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input 
+                                type="password" 
+                                id="loginPassword" 
+                                required 
+                                placeholder="Contraseña"
+                                value="Demo123!"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe" style="margin: 0;">Recuérdame</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">🔓 Iniciar Sesión</button>
+                    </form>
+
+                    <div class="help-text" style="margin-top: 1rem;">
+                        <p>¿Olvidas tu contraseña? Contacta al administrador del club.</p>
+                    </div>
+                </div>
+
+                <!-- TAB: REGISTRO -->
+                <div id="register" class="tab-content">
+                    <form id="registerForm" onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input 
+                                type="text" 
+                                id="registerName" 
+                                required 
+                                placeholder="Tu nombre"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input 
+                                type="email" 
+                                id="registerEmail" 
+                                required 
+                                placeholder="tu@email.com"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                required 
+                                placeholder="Al menos 8 caracteres"
+                            >
+                            <div class="help-text">
+                                Mínimo 8 caracteres, incluir mayúscula y número.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirmar Contraseña</label>
+                            <input 
+                                type="password" 
+                                id="registerPasswordConfirm" 
+                                required 
+                                placeholder="Confirma tu contraseña"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rol</label>
+                            <select id="registerRole" required>
+                                <option value="">Selecciona un rol</option>
+                                <option value="player">Jugador</option>
+                                <option value="coach">Entrenador</option>
+                                <option value="director">Director</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">✅ Crear Cuenta</button>
+                    </form>
+
+                    <div class="help-text" style="margin-top: 1rem;">
+                        <p>Al registrarse, acepta los términos de servicio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+
+    <script>
+        // ==================== TABS ====================
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.dataset.tab;
+                
+                // Desactivar todos los tabs
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Activar tab seleccionado
+                btn.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+                
+                // Limpiar mensaje
+                clearMessage();
+            });
+        });
+
+        // ==================== MANEJO DE FORMULARIOS ====================
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            const result = Authentication.login(email, password, rememberMe);
+
+            if (result.success) {
+                showMessage('✅ ' + result.message, 'success');
+                setTimeout(() => {
+                    window.location.href = 'app.html';
+                }, 1000);
+            } else {
+                showMessage('❌ ' + result.message, 'error');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            const role = document.getElementById('registerRole').value;
+
+            // Validaciones
+            if (password !== passwordConfirm) {
+                showMessage('❌ Las contraseñas no coinciden', 'error');
+                return;
+            }
+
+            if (!role) {
+                showMessage('❌ Selecciona un rol', 'error');
+                return;
+            }
+
+            const result = Authentication.register(email, password, name, role);
+
+            if (result.success) {
+                showMessage('✅ ' + result.message, 'success');
+                setTimeout(() => {
+                    document.getElementById('registerForm').reset();
+                    document.querySelector('[data-tab="login"]').click();
+                    document.getElementById('loginEmail').value = email;
+                }, 1500);
+            } else {
+                showMessage('❌ ' + result.message, 'error');
+            }
+        }
+
+        // ==================== UTILIDADES ====================
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message show message-${type}`;
+        }
+
+        function clearMessage() {
+            const messageEl = document.getElementById('message');
+            messageEl.className = 'message';
+        }
+
+        // Rellenar último usuario si existe
+        window.addEventListener('load', () => {
+            const lastUser = Authentication.getLastUser();
+            if (lastUser) {
+                document.getElementById('loginEmail').value = lastUser.email;
+            }
+        });
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+
+</body>
+</html>
